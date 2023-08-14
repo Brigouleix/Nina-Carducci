@@ -147,10 +147,10 @@
       }
       let index = 0,
         next = null;
-
+    
       $(imagesCollection).each(function(i) {
         if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i - 1 ;
+          index = (i - 1 + imagesCollection.length) % imagesCollection.length;
         }
       });
       next =
@@ -186,15 +186,16 @@
       }
       let index = 0,
         next = null;
-
+    
       $(imagesCollection).each(function(i) {
         if ($(activeImage).attr("src") === $(this).attr("src")) {
-          index = i + 1;
+          index = (i + 1) % imagesCollection.length;
         }
       });
       next = imagesCollection[index] || imagesCollection[0];
       $(".lightboxImage").attr("src", $(next).attr("src"));
-    },
+    }
+    ,
     createLightBox(gallery, lightboxId, navigation) {
       gallery.append(`<div class="modal fade" id="${
         lightboxId ? lightboxId : "galleryLightbox"
